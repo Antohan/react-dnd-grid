@@ -1,37 +1,25 @@
 import React from 'react';
-import { useDrag } from 'react-dnd';
-
-const style: React.CSSProperties = {
-  width: '90px',
-  height: '90px',
-  borderRadius: '50%',
-  backgroundColor: '#003faa',
-};
+import ItemModel from '../../models/ItemModel';
 
 type ItemProps = {
-};
-
-export const ItemTypes = {
-  ITEM: 'item',
+  item: ItemModel,
 };
 
 /**
  * Item component.
  */
-const Item: React.FC<ItemProps> = (props) => { 
-  const [{ isDragging }, drag] = useDrag({
-    item: { type: ItemTypes.ITEM },
-    collect: monitor => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  });
-  const opacity = isDragging ? 0.8 : 1;
+const Item: React.FC<React.PropsWithChildren<ItemProps>> = (props) => {
+  const { item, children } = props;
+
+  const style: React.CSSProperties = {
+    height: 100 * item.rows + 'px',
+    width: 100 * item.columns + 'px',
+  }; 
 
   return (
-    <div
-      ref={drag}
-      style={{ ...style, opacity }}
-    />
+    <div style={style}>
+      {children}
+    </div>
   );
 };
 

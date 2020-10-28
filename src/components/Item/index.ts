@@ -1,1 +1,1 @@
-export { default, ItemTypes } from './Item';
+export { default } from './Item';
